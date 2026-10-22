@@ -1,0 +1,10 @@
+{
+  "name": "ai-smart-study-planner-root",
+  "version": "1.0.0",
+  "description": "Root configuration for AI Smart Study Planner",
+  "scripts": {
+    "start": "npm start --prefix Server",
+    "server": "npm run dev --prefix Server",
+    "client": "npm run dev --prefix Client"
+  }
+}

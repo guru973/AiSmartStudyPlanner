@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0b0d19;
+    color: #ffffff;
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+}
+
+#root {
+    width: 100%;
+    min-height: 100vh;
+}
