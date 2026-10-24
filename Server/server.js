@@ -18,7 +18,20 @@ app.use('/api/planner', plannerRoutes);
 const path = require('path');
 const fs = require('fs');
 
-// Health Check & Discovery Routes
+// Root & Health Check Routes
+app.get('/', (req, res) => {
+    if (fs.existsSync(clientDistPath)) {
+        return res.sendFile(path.join(clientDistPath, 'index.html'));
+    }
+    res.status(200).json({
+        status: 'ok',
+        service: 'AI Smart Study Planner API',
+        message: 'Backend server is running successfully.',
+        health: '/api/health',
+        availableEndpoints: ['/', '/api', '/api/health', '/api/auth', '/api/planner']
+    });
+});
+
 app.get('/api', (req, res) => {
     res.json({ status: 'ok', message: 'AI Smart Study Planner API is online' });
 });
@@ -43,13 +56,16 @@ app.use('/api', (req, res) => {
     });
 });
 
-// SPA Fallback for client-side routing
+// Fallback for unmatched client-side routes
 app.use((req, res) => {
     if (fs.existsSync(clientDistPath)) {
-        res.sendFile(path.join(clientDistPath, 'index.html'));
-    } else {
-        res.status(404).send('AI Study Planner API is running. Client build not found.');
+        return res.sendFile(path.join(clientDistPath, 'index.html'));
     }
+    res.status(404).json({
+        error: 'Not Found',
+        message: `Route '${req.originalUrl}' does not exist on this server.`,
+        availableEndpoints: ['/', '/api', '/api/health', '/api/auth', '/api/planner']
+    });
 });
 
 // Start server
