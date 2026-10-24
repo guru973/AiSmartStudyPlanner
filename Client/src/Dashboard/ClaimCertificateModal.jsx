@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import confetti from 'canvas-confetti';
 import { Award, ShieldCheck, X, Sparkles, CheckCircle2, ChevronDown, BookOpen } from 'lucide-react';
-
-const API_BASE = 'http://localhost:5000/api/planner';
+import { API_PLANNER as API_BASE } from '../apiConfig';
 
 export default function ClaimCertificateModal({
     isOpen,

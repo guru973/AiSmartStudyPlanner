@@ -3,8 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { ShieldCheck, AlertCircle, Award, Calendar, BookOpen, CheckCircle, ArrowLeft } from 'lucide-react';
 import CertificateModal from './CertificateModal';
-
-const API_BASE = 'http://localhost:5000/api/planner';
+import { API_PLANNER as API_BASE } from '../apiConfig';
 
 export default function VerifyCertificate() {
     const { certId } = useParams();

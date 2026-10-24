@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: ai-smartstudy-planner-backend
+    env: node
+    plan: free
+    rootDir: Server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DB_PORT
+        value: "1433"
+      - key: DB_ENCRYPT
+        value: "true"
+      - key: DB_TRUST_CERT
+        value: "true"

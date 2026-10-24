@@ -53,9 +53,8 @@ import {
 import { playAmbientSound, stopAmbientSound, setAmbientVolume } from './audioEngine';
 import CertificateModal from './CertificateModal';
 import ClaimCertificateModal from './ClaimCertificateModal';
+import { API_PLANNER as API_BASE } from '../apiConfig';
 import './Dashboard.css';
-
-const API_BASE = 'http://localhost:5000/api/planner';
 
 export default function Dashboard() {
     const navigate = useNavigate();
