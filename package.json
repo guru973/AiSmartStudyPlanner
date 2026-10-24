@@ -2,10 +2,15 @@
   "name": "ai-smart-study-planner-root",
   "version": "1.0.0",
   "description": "Root configuration for AI Smart Study Planner",
+  "workspaces": [
+    "Client",
+    "Server"
+  ],
   "scripts": {
     "start": "npm start --prefix Server",
     "server": "npm run dev --prefix Server",
     "client": "npm run dev --prefix Client",
-    "build": "npm run build --prefix Client"
+    "build": "npm install --prefix Client && npm run build --prefix Client",
+    "vercel-build": "npm install --prefix Client && npm run build --prefix Client"
   }
 }
