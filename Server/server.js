@@ -18,6 +18,12 @@ app.use('/api/planner', plannerRoutes);
 const path = require('path');
 const fs = require('fs');
 
+// Serve Client static build if available
+const clientDistPath = path.join(__dirname, '../Client/dist');
+if (fs.existsSync(clientDistPath)) {
+    app.use(express.static(clientDistPath));
+}
+
 // Root & Health Check Routes
 app.get('/', (req, res) => {
     if (fs.existsSync(clientDistPath)) {
@@ -39,12 +45,6 @@ app.get('/api', (req, res) => {
 app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', message: 'Backend connected successfully', timestamp: new Date().toISOString() });
 });
-
-// Serve Client static build if available
-const clientDistPath = path.join(__dirname, '../Client/dist');
-if (fs.existsSync(clientDistPath)) {
-    app.use(express.static(clientDistPath));
-}
 
 // 404 Handler for unmatched API routes
 app.use('/api', (req, res) => {
