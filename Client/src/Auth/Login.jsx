@@ -52,7 +52,14 @@ export default function Login() {
             }
         } catch (err) {
             console.error('Login error:', err);
-            setError(err.response?.data?.message || 'Invalid credentials. Please try again.');
+            const serverMsg = err.response?.data?.message;
+            if (serverMsg) {
+                setError(serverMsg);
+            } else if (err.code === 'ERR_NETWORK' || !err.response) {
+                setError('Cannot reach server. Render free tier backend is spinning up (takes ~30s on cold start). Please wait a moment and try again.');
+            } else {
+                setError('Invalid credentials. Please try again.');
+            }
         } finally {
             setLoading(false);
         }

@@ -57,7 +57,14 @@ export default function Register() {
             }
         } catch (err) {
             console.error('Registration error:', err);
-            setError(err.response?.data?.message || 'Something went wrong. Please try again.');
+            const serverMsg = err.response?.data?.message;
+            if (serverMsg) {
+                setError(serverMsg);
+            } else if (err.code === 'ERR_NETWORK' || !err.response) {
+                setError('Cannot reach server. Render free tier backend is spinning up (takes ~30s on cold start). Please wait a moment and try again.');
+            } else {
+                setError('Something went wrong. Please try again.');
+            }
         } finally {
             setLoading(false);
         }
